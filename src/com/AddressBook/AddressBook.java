@@ -15,9 +15,8 @@ public class AddressBook {
 	}
 
 	// add new person record to arraylist after taking input
-	public void addPerson() {
-		System.out.println("Enter First name");
-		String fName = sc.nextLine();
+	public void addPerson(String firstName) {
+		String fName = firstName;
 		System.out.println("Enter address");
 		String address = sc.nextLine();
 		System.out.println("Enter phone no");
@@ -36,6 +35,7 @@ public class AddressBook {
 		ContactPerson p = new ContactPerson(fName, address, phoneNumber, lName, zipCode, city, state, emailId);
 		// add the above contactPerson object to Arraylist
 		persons.add(p);
+		System.out.println("entry Details Key:" + persons);
 	}
 
 	public void search(String name) {
@@ -43,6 +43,7 @@ public class AddressBook {
 			ContactPerson p = (ContactPerson) persons.get(i);
 			if (name.equals(p.fName)) {
 				p.print();
+				break;
 			} else {
 				System.out.println("no search record found");
 			}
@@ -54,8 +55,25 @@ public class AddressBook {
 			ContactPerson p = (ContactPerson) persons.get(i);
 			if (name.equals(p.fName)) {
 				persons.remove(i);
+				break;
 			}
 		}
 	}
+	// add new person record to arraylist after taking input
+	public void callAddPersonIfNotAlreadyPresent(String name) {
+		for (int i = 0; i < persons.size(); i++) {
+			ContactPerson contact = persons.get(i);
+			System.out.println("contact" + contact);
+			System.out.println("name" + name);
+			if (contact.fName.equals(name)) {
+				System.out.println("Sorry this contact already exists.");
+				return; // the id exists, so we exit the method.
+			}
+		}
+		addPerson(name);
+	}
 
-}
+	
+	}
+
+
