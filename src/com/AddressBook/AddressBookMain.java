@@ -9,10 +9,14 @@ public class AddressBookMain {
 		System.out.println("Welcome to Address Book");
 
 		AddressBook add = new AddressBook();
-		String name;
 
 		Scanner sc = new Scanner(System.in);
-		add.addPerson();
+		String name;
+		for (int i = 0; i <= 2; i++) {
+			System.out.println("Enter First name");
+			name = sc.nextLine();
+			add.callAddPersonIfNotAlreadyPresent(name);
+		}
 		System.out.println("Enter the Name to search");
 		name = sc.nextLine();
 		add.search(name);
@@ -22,6 +26,9 @@ public class AddressBookMain {
 		System.out.println("Enter the Name to search");
 		name = sc.nextLine();
 		add.search(name);
-
+		System.out.println("Enter the search name by city or state");
+		String city = sc.nextLine();
+		add.searchByCityOrState(city);
 	}
+
 }

@@ -24,6 +24,13 @@ public class ContactPerson {
 		state = stateName;
 		emailId = email;
 	}
+	public String getFirstName() {
+		return this.fName;
+	}
+
+	public String toString() {
+		return "contact -> " + getFirstName();
+	}
 
 	public void print() {
 
