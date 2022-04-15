@@ -24,6 +24,11 @@ public class ContactPerson {
 		state = stateName;
 		emailId = email;
 	}
+
+	public ContactPerson() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getFirstName() {
 		return this.fName;
 	}
@@ -34,8 +39,9 @@ public class ContactPerson {
 
 	public void print() {
 
-		System.out.println("firstName :" + fName + "address :" + address + "phone :" + phoneNumber + "lastName :"
-				+ lName + "zipCode :" + zipCode + "City :" + city + "State :" + state + "email :" + emailId);
+		System.out.println("  firstName :    " + fName + "  address :   " + address + "  phone :   " + phoneNumber
+				+ "  lastName :   " + lName + "  zipCode :   " + zipCode + "  City :   " + city + "  State :   " + state
+				+ "  email :   " + emailId);
 	}
 
 }

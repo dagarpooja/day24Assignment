@@ -1,54 +1,80 @@
 package com.AddressBook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class AddressBook {
 
-	ArrayList<ContactPerson> persons;
+	
 	Scanner sc = new Scanner(System.in);
+	
+	
+	LinkedList<ContactPerson> linkedList = new LinkedList<ContactPerson>();
+	HashMap<String, LinkedList> hashMap = new HashMap<String, LinkedList>();
+	String addressBookName;
 
 	// constructor
 	public AddressBook() {
-		persons = new ArrayList<ContactPerson>();
+		linkedList = new LinkedList<ContactPerson>();
 
 	}
 
 	// add new person record to arraylist after taking input
-	public void addPerson(String firstName) {
-		String fName = firstName;
+	public void addPerson(String addressBookName1) {
+		if(hashMap.containsKey(addressBookName1)) {
+			
+		
+		System.out.println("Enter First Name");
+		String fName = sc.next();
 		
 		System.out.println("Enter Last Name");
-		String lName = sc.nextLine();
+		String lName = sc.next();
 		
 		System.out.println("Enter address");
-		String address = sc.nextLine();
+		String address = sc.next();
 		
 		System.out.println("Enter phone no");
-		String phoneNumber = sc.nextLine();
+		String phoneNumber = sc.next();
 		
 		System.out.println("Enter Zip code");
-		String zipCode = sc.nextLine();
+		String zipCode = sc.next();
 		
 		System.out.println("Enter City Name");
-		String city = sc.nextLine();
+		String city = sc.next();
 		
 		System.out.println("Enter State Name");
-		String state = sc.nextLine();
+		String state = sc.next();
 		
 		System.out.println("Enter Email Id");
-		String emailId = sc.nextLine();
+		String emailId = sc.next();
+		
+		
 		
 		// construct new person object
 		ContactPerson p = new ContactPerson(fName, address, phoneNumber, lName, zipCode, city, state, emailId);
 		// add the above contactPerson object to Arraylist
-		persons.add(p);
-		System.out.println("entry Details Key:" + persons);
+		linkedList.add(p);
+		
+		System.out.println("entry Details Key:" + linkedList);
+		hashMap.put(addressBookName1, new LinkedList<ContactPerson>(linkedList));
+		
+		System.out.println("My Hash Map:" +hashMap);
+		
+			
+		}
 	}
-
-	public void search(String name) {
-		for (int i = 0; i < persons.size(); i++) {
-			ContactPerson p =  persons.get(i);
+	public void display() {
+		for (int i = 0; i < linkedList.size(); i++) {
+			ContactPerson p =  linkedList.get(i);
+			p.print();
+		}
+	}
+	
+	public void searchPerson(String name) {
+		for (int i = 0; i < linkedList.size(); i++) {
+			ContactPerson p =  linkedList.get(i);
 			if (name.equals(p.fName)) {
 				p.print();
 				break;
@@ -58,19 +84,19 @@ public class AddressBook {
 		}
 	}
 
-	public void remove(String name) {
-		for (int i = 0; i < persons.size(); i++) {
-			ContactPerson p =  persons.get(i);
+	public void deletePerson(String name) {
+		for (int i = 0; i < linkedList.size(); i++) {
+			ContactPerson p =  linkedList.get(i);
 			if (name.equals(p.fName)) {
-				persons.remove(i);
+				linkedList.remove(i);
 				break;
 			}
 		}
 	}
 	// add new person record to arraylist after taking input
 	public void callAddPersonIfNotAlreadyPresent(String name) {
-		for (int i = 0; i < persons.size(); i++) {
-			ContactPerson contact = persons.get(i);
+		for (int i = 0; i < linkedList.size(); i++) {
+			ContactPerson contact = linkedList.get(i);
 			
 			if (contact.fName.equals(name)) {
 				System.out.println("Sorry this contact already exists.");
@@ -83,8 +109,8 @@ public class AddressBook {
 	
 	public void searchByCityOrState(String cityName) {
 		int count=0;
-		for (int i = 0; i < persons.size(); i++) {
-			ContactPerson p =  persons.get(i);
+		for (int i = 0; i < linkedList.size(); i++) {
+			ContactPerson p =  linkedList.get(i);
 			if (cityName.equals(p.city) || cityName.equals(p.state)) {
 				p.print();
 				count++;
@@ -95,7 +121,23 @@ public class AddressBook {
 		}System.out.println("number of matches records:" +count);
 	}
 	
-	
+
+	public void createAddressBook() {
+		System.out.println("\nCreate address book ");
+		String addressBookName = sc.next();
+		System.out.println("Addres book name is :" + addressBookName);
+		if (hashMap.containsKey(addressBookName)) {
+			System.out.println("\n address book is already exist with same name ,do u want to create another?(yes/no)");
+			String ans = sc.next();
+			if (ans.equalsIgnoreCase("yes")) {
+				createAddressBook();
+			}
+		} else {
+			hashMap.put(addressBookName, new LinkedList<ContactPerson>());
+		}
+		
+	}
+
 	
 	}
 

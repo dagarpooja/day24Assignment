@@ -11,24 +11,57 @@ public class AddressBookMain {
 		AddressBook add = new AddressBook();
 
 		Scanner sc = new Scanner(System.in);
-		String name;
-		for (int i = 0; i <= 2; i++) {
-			System.out.println("Enter First name");
-			name = sc.nextLine();
-			add.callAddPersonIfNotAlreadyPresent(name);
-		}
-		System.out.println("Enter the Name to search");
-		name = sc.nextLine();
-		add.search(name);
-		System.out.println("Enter the Name to remove");
-		name = sc.nextLine();
-		add.remove(name);
-		System.out.println("Enter the Name to search");
-		name = sc.nextLine();
-		add.search(name);
-		System.out.println("Enter the search name by city or state");
-		String city = sc.nextLine();
-		add.searchByCityOrState(city);
-	}
 
+		System.out.println("Enter the desire option");
+		int option = sc.nextInt();
+
+		System.out.print(" 1. AddPerson ");
+		System.out.print(" 2. Delete Person ");
+		System.out.print(" 3. Search Person ");
+		System.out.print(" 4. Unique Contact ");
+		System.out.print(" 5. Search By City ");
+
+		String name;
+		System.out.println("\n \n Enter the Contact Name");
+		name = sc.nextLine();
+		switch (option) {
+		case 1:
+
+			for (int i = 0; i <= 2; i++) {
+				add.createAddressBook();
+
+				System.out.println("\nGive the name of Address book ");
+				String addressBook = sc.next();
+
+				for (int j = 0; j <= 2; j++) {
+					add.addPerson(addressBook);
+					add.display();
+
+				}
+
+			}
+			break;
+
+		case 2:
+
+			add.deletePerson(name);
+			break;
+			
+		case 3:
+			add.searchPerson(name);
+			break;
+			
+		case 4:
+
+			add.callAddPersonIfNotAlreadyPresent(name);
+			break;
+			
+			
+		case 5:
+			add.searchByCityOrState(name);
+			break;
+
+		}
+
+	}
 }
